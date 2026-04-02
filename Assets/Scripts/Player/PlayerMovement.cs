@@ -32,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
     void OnMove(InputAction.CallbackContext context)
     {
         movement = context.ReadValue<Vector2>();
-
-        // Flip sprite based on horizontal movement
         if (movement.x > 0)
             GetComponent<SpriteRenderer>().flipX = true;
         else if (movement.x < 0)
@@ -47,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("FixedUpdate - movement: " + movement + " | rb position: " + rb.position);
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 }
