@@ -4,13 +4,16 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject dronePrefab;
     public GameObject tankPrefab;
+    public GameObject queenPrefab;
 
-    public float droneSpawnRate = 2f;
-    public float tankSpawnRate = 10f;
+    public float droneSpawnRate = 3f;
+    public float tankSpawnRate = 15f;
+    public float queenSpawnRate = 30f;
     public float spawnRadius = 15f;
 
     private float droneTimer;
     private float tankTimer;
+    private float queenTimer;
 
     private Transform player;
 
@@ -27,6 +30,7 @@ public class EnemySpawner : MonoBehaviour
 
         droneTimer += Time.deltaTime;
         tankTimer += Time.deltaTime;
+        queenTimer += Time.deltaTime;
 
         if (droneTimer >= droneSpawnRate)
         {
@@ -38,6 +42,12 @@ public class EnemySpawner : MonoBehaviour
         {
             tankTimer = 0f;
             SpawnEnemy(tankPrefab);
+        }
+
+        if (queenTimer >= queenSpawnRate)
+        {
+            queenTimer = 0f;
+            SpawnEnemy(queenPrefab);
         }
     }
 

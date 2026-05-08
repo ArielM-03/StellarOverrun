@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
     public int currentRound = 1;
     public bool isGameOver = false;
+
+    public AudioSource retryAudio;
+    public AudioSource menuAudio;
+    public float audioDelay = 0.2f;
 
     void Awake()
     {
@@ -30,8 +34,8 @@ public class GameManager : MonoBehaviour
         {
             UIManager.Instance.ShowUpgradePanel();
         }
-            
-            UIManager.Instance.UpdateLevelText(currentRound);
+
+        UIManager.Instance.UpdateLevelText(currentRound);
     }
 
     public void GameOver()
@@ -42,13 +46,20 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("GameScene");
+        StartCoroutine(LoadWithDelay("GameScene", retryAudio));
     }
 
     public void GoToMainMenu()
     {
+        StartCoroutine(LoadWithDelay("MainMenu", menuAudio));
+    }
+
+    IEnumerator LoadWithDelay(string sceneName, AudioSource audio)
+    {
+        if (audio != null)
+            audio.Play();
+        yield return new WaitForSecondsRealtime(audioDelay);
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(sceneName);
     }
 }

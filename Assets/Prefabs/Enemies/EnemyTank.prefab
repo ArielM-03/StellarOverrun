@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 9
   xpValue: 20
+  deathSound: {fileID: 8300000, guid: 6c3e823a2f1c1d641bcf6e05da1fa79e, type: 3}
 --- !u!114 &-3325745784984844818
 MonoBehaviour:
   m_ObjectHideFlags: 0
